@@ -562,6 +562,16 @@ class _PreloadPageViewState extends State<PreloadPageView> {
     _lastReportedPage = widget.controller.initialPage;
   }
 
+  @override
+  void didUpdateWidget(PreloadPageView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.preloadPagesCount != widget.preloadPagesCount) {
+      _validatePreloadPagesCount(widget.preloadPagesCount);
+      _preloadPagesCount = widget.preloadPagesCount;
+    }
+  }
+
   void _validatePreloadPagesCount(int preloadPagesCount) {
     if (preloadPagesCount < 0) {
       throw 'preloadPagesCount cannot be less than 0. Actual value: $preloadPagesCount';
